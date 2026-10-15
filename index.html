@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrosirPro - Kasir Grosir</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- Sprite ikon SVG (dipakai lewat <use href="#id">) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="i-pos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><rect x="7.5" y="6.5" width="9" height="3.5" rx=".8"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01M16 17.5h.01"/></symbol>
+        <symbol id="i-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z"/><path d="M9 8h6M9 12h6"/></symbol>
+        <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+        <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L21 8H6"/></symbol>
+        <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5"/><circle cx="16.5" cy="13.5" r="1.1"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+        <!-- Metode pembayaran -->
+        <symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v.01M18 14.5v.01"/></symbol>
+        <symbol id="i-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 4l9 5.5"/><path d="M5 9.5V18M9.5 9.5V18M14.5 9.5V18M19 9.5V18"/><path d="M3 20.5h18"/></symbol>
+        <symbol id="i-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17v4"/></symbol>
+        <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></symbol>
+        <!-- Logo e-wallet (warna brand, bentuk mirip aslinya) -->
+    </defs>
+</svg>
+
+<div class="app">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">G</div>
+            <div>
+                <h2>Grosir Simamora</h2>
+                <small>Sistem Kasir</small>
+            </div>
+        </div>
+
+        <div class="menu-title">MENU UTAMA</div>
+        <div class="menu active"><svg class="ico"><use href="#i-pos"/></svg><span>Kasir Penjualan</span></div>
+        <div class="menu"><svg class="ico"><use href="#i-receipt"/></svg><span>Transaksi</span></div>
+        <div class="menu"><svg class="ico"><use href="#i-box"/></svg><span>Produk</span></div>
+
+        <div class="sidebar-bottom">
+            <div class="status-dot"></div>
+            Sistem kasir aktif
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <h1>Kasir Penjualan</h1>
+                <p>Kelola transaksi grosir dengan mudah.</p>
+            </div>
+            <div class="admin">
+                <div class="avatar">A</div>
+                <div><b>Administrator</b><small>Kasir utama</small></div>
+            </div>
+        </header>
+
+        <section class="stats">
+            <div class="stat-card">
+                <span class="stat-icon"><svg class="ico"><use href="#i-box"/></svg></span>
+                <p>Jenis Produk</p>
+                <h2 id="jumlahProduk">8</h2>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon"><svg class="ico"><use href="#i-cart"/></svg></span>
+                <p>Item di Keranjang</p>
+                <h2 id="jumlahItem">0</h2>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon"><svg class="ico"><use href="#i-wallet"/></svg></span>
+                <p>Total Belanja</p>
+                <h2 id="ringkasanTotal">Rp0</h2>
+            </div>
+        </section>
+
+        <div class="workspace">
+            <section class="panel produk-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Pilih Produk</h2>
+                        <p>Pilih barang untuk ditambahkan.</p>
+                    </div>
+                    <span class="tag">GROSIR</span>
+                </div>
+
+                <div class="search-wrap">
+                    <svg class="ico"><use href="#i-search"/></svg>
+                    <input type="search" id="cariProduk"
+                           placeholder="Cari nama produk...">
+                </div>
+
+                <div class="product-grid" id="daftarProduk"></div>
+
+                <div class="manual-form">
+                    <h3>Tambah ke keranjang</h3>
+                    <label for="barang">Nama barang</label>
+                    <select id="barang">
+                        <option value="">Pilih barang</option>
+                    </select>
+
+                    <div class="two-columns">
+                        <div>
+                            <label for="jumlah">Jumlah</label>
+                            <input type="number" id="jumlah"
+                                   value="1" min="1" step="1">
+                        </div>
+                        <div>
+                            <label for="harga">Harga satuan (Rp)</label>
+                            <input type="number" id="harga"
+                                   min="0" step="1" placeholder="Harga">
+                        </div>
+                    </div>
+                    <button id="btnTambah" class="btn btn-primary full">
+                        <svg class="ico"><use href="#i-plus"/></svg> Tambahkan Barang
+                    </button>
+                </div>
+            </section>
+
+            <section class="panel checkout-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Keranjang Belanja</h2>
+                        <p>Periksa barang sebelum membayar.</p>
+                    </div>
+                    <button id="btnKosongkan" class="btn btn-light">
+                        Kosongkan
+                    </button>
+                </div>
+
+                <div class="cart-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th>Harga</th>
+                                <th>Qty</th>
+                                <th>Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="keranjang"></tbody>
+                    </table>
+                </div>
+
+                <div class="discount-box">
+                    <label for="diskon">Diskon transaksi (%)</label>
+                    <input type="number" id="diskon"
+                           value="0" min="0" max="100" step="1">
+                </div>
+
+                <div class="summary">
+                    <div><span>Subtotal</span><b id="total">Rp0</b></div>
+                    <div><span>Diskon</span><b id="potongan">Rp0</b></div>
+                    <div class="grand-total">
+                        <span>Total pembayaran</span>
+                        <strong id="totalBayar">Rp0</strong>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Metode Pembayaran</h3>
+                <div class="payment-grid" id="pilihanPembayaran">
+                    <button class="payment-option selected" data-metode="Tunai">
+                        <svg class="pay-ico"><use href="#i-cash"/></svg><b>Tunai</b><small>Uang cash</small>
+                    </button>
+                    <button class="payment-option" data-metode="Transfer Bank">
+                        <svg class="pay-ico"><use href="#i-bank"/></svg><b>Transfer</b><small>Bank</small>
+                    </button>
+                    <button class="payment-option" data-metode="QRIS">
+                        <svg class="pay-ico"><use href="#i-qr"/></svg><b>QRIS</b><small>Scan QR</small>
+                    </button>
+                    <button class="payment-option" data-metode="DANA">
+                        <svg class="pay-ico wallet" viewBox="0 0 44 26" width="44" height="26" style="width:44px;height:26px" role="img" aria-label="DANA"><rect width="44" height="26" rx="6" fill="#118EEA"/><text x="22" y="17" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="11.5" fill="#fff">DANA</text></svg><b>DANA</b><small>E-wallet</small>
+                    </button>
+                    <button class="payment-option" data-metode="OVO">
+                        <svg class="pay-ico wallet" viewBox="0 0 44 26" width="44" height="26" style="width:44px;height:26px" role="img" aria-label="OVO"><rect width="44" height="26" rx="6" fill="#4C3494"/><g fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11.5" cy="13" r="4.6"/><path d="M18.5 8.5l3.5 8.8 3.5-8.8"/><circle cx="32.5" cy="13" r="4.6"/></g></svg><b>OVO</b><small>E-wallet</small>
+                    </button>
+                    <button class="payment-option" data-metode="GoPay">
+                        <svg class="pay-ico wallet" viewBox="0 0 44 26" width="44" height="26" style="width:44px;height:26px" role="img" aria-label="GoPay"><rect x=".5" y=".5" width="43" height="25" rx="6" fill="#fff" stroke="#cbd5e1"/><text x="22" y="17" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="11.5"><tspan fill="#0A3D8F">go</tspan><tspan fill="#00AED6">pay</tspan></text></svg><b>GoPay</b><small>E-wallet</small>
+                    </button>
+                    <button class="payment-option" data-metode="ShopeePay">
+                        <svg class="pay-ico wallet" viewBox="0 0 44 26" width="44" height="26" style="width:44px;height:26px" role="img" aria-label="ShopeePay"><rect width="44" height="26" rx="6" fill="#EE4D2D"/><g transform="translate(6 5)"><path d="M1.2 4.4h12.6l-.9 10a1.5 1.5 0 0 1-1.5 1.4H3.6a1.5 1.5 0 0 1-1.5-1.4z" fill="#fff"/><path d="M4.7 6V4.5a2.8 2.8 0 0 1 5.6 0V6" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/><path d="M9.8 9.4c-.4-.9-1.3-1.3-2.2-1.3-1.1 0-1.8.5-1.8 1.3 0 .9.9 1.1 1.8 1.3 1 .2 2 .5 2 1.5s-.9 1.5-2 1.5c-1 0-1.8-.4-2.3-1.3" fill="none" stroke="#EE4D2D" stroke-width="1.2" stroke-linecap="round"/></g><text x="24" y="17" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="10" fill="#fff">Pay</text></svg><b>ShopeePay</b><small>E-wallet</small>
+                    </button>
+                    <button class="payment-option" data-metode="Kartu Debit">
+                        <svg class="pay-ico"><use href="#i-card"/></svg><b>Kartu Debit</b><small>EDC</small>
+                    </button>
+                </div>
+
+                <div class="payment-detail">
+                    <label id="labelUang" for="uang">Uang diterima (Rp)</label>
+                    <input type="number" id="uang"
+                           min="0" step="1" placeholder="Masukkan uang pelanggan">
+
+                    <div class="change-row">
+                        <span id="labelKembalian">Kembalian</span>
+                        <strong id="kembalian">Rp0</strong>
+                    </div>
+                </div>
+
+                <button id="btnBayar" class="btn btn-success full btn-checkout">
+                    <svg class="ico"><use href="#i-check"/></svg> Proses Pembayaran
+                </button>
+                <p id="pesan" role="status"></p>
+            </section>
+        </div>
+
+        <footer>GrosirPro © 2026 · Aplikasi Kasir Toko Grosir</footer>
+    </main>
+</div>
+
+<div id="modalStruk" class="modal hidden">
+    <div class="receipt">
+        <h2>GROSIRPRO</h2>
+        <p class="receipt-subtitle">Struk Pembayaran</p>
+        <hr>
+        <p id="strukTanggal"></p>
+        <p id="strukMetode"></p>
+        <div id="strukBarang"></div>
+        <hr>
+        <p>Subtotal <b id="strukSubtotal"></b></p>
+        <p>Diskon <b id="strukDiskon"></b></p>
+        <h3>Total <strong id="strukTotal"></strong></h3>
+        <p id="strukUang"></p>
+        <p id="strukKembalian"></p>
+        <p class="receipt-subtitle">Terima kasih telah berbelanja!</p>
+        <button id="btnCetak" class="btn btn-primary full">Cetak Struk</button>
+        <button id="btnSelesai" class="btn btn-light full">Transaksi Baru</button>
+    </div>
+</div>
+</body>
+</html>
